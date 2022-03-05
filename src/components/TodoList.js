@@ -5,9 +5,9 @@ import TodoForm from "./TodoForm";
 const TodoList = ({todos, onComplete, onEdit, onDelete, onUpdatTodo}) => {
     const [edit, setEdit] = useState({id: null, text:"", isCompleted:false})
     
-    const editTodoHandler = (id) => {
-        console.log(id)
-        onEdit(edit.id)
+    const editTodoHandler = (newValue) => {
+        onEdit(edit.id, newValue);
+        setEdit({id: null, text: ""})
     }
     const renderTodos = () => {
         if (todos.lenght === 0) return <p>add some todos ...</p>

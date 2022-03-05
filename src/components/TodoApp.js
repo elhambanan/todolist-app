@@ -34,8 +34,13 @@ const TodoApp = () => {
         const filteredTodos = todos.filter((t) => t.id !== id)
         setTodos(filteredTodos)
     }
-    const editTodo = (id) => {
-         console.log(id)
+    const editTodo = (id, newValue) => {
+        const index = todos.findIndex(t => t.id === id)
+        const selectedTodo = {...todos[index]};
+        selectedTodo.text = newValue;
+        const updatedTodos = [...todos];
+        updatedTodos[index] = selectedTodo;
+        setTodos(updatedTodos);
     }
     return ( 
         <div className = "container">
@@ -43,8 +48,8 @@ const TodoApp = () => {
             <TodoList 
                 todos={todos}
                 onComplete={completeTodo}
-                onEdit={editTodo}
                 onDelete={removeTodo}
+                onEdit={editTodo}
                 />
         </div>
      );

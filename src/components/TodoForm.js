@@ -1,16 +1,15 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TodoList from "./TodoList";
 
 const TodoForm = (props) => {
-    const [input, setInput] = useState("");
-    const [addTodo, setAddTodo] = useState("");
-    
+    const [input, setInput] = useState(props.edit ? props.edit.text : "");
+    const inputRef = useRef(null);
+    // useEffect(() => {
+    //     inputRef.current.focus();
+    // }, []);
+
     const changeHandler = (e) => {
         setInput(e.target.value)
-    }
-    const addHandler = () => {
-        console.log("add") 
-        setAddTodo()
     }
     const submitHandler = (e) => {
         e.preventDefault()
@@ -24,19 +23,22 @@ const TodoForm = (props) => {
     }
     return ( 
         <form onSubmit={submitHandler}>
-            {props.edit ? (
-                <>
-                    <input type="text" value={input} onChange={changeHandler} placeholder="edit todo"/>
-                    <button type="submit" onClick={addHandler}>Edit</button>
-                </>
-            ) : (
-                <>
-                    <input type="text" value={input} onChange={changeHandler} placeholder="add todo"/>
-                    <button type="submit" onClick={addHandler}>Add</button>
-                </>
-            )}
+            <div className="formControl"> 
+                <input 
+                    type="text" 
+                    value={input} 
+                    onChange={changeHandler} 
+                    placeholder={props.edit ? "update todo ..." : "add new todo ..."}
+                    ref={inputRef}
+                />
+                <button 
+                    className={`btn ${props.edit ? "updateTodo" : "addTodo"}`} 
+                    type="submit">
+                    {props.edit ? "Update" : "Add"}
+                </button>
+            </div>
         </form>  
      );
-}
+};
  
 export default TodoForm;
