@@ -27,7 +27,8 @@ const TodoList = ({todos, onComplete, onEdit, onDelete, onUpdatTodo}) => {
         <div>
             {edit.id 
                 ? <TodoForm  submitTodo={editTodoHandler} edit={edit} />
-                :renderTodos()}
+                : renderTodos()
+            }
         </div>
         );
 };

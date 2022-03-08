@@ -32,6 +32,10 @@
     padding: 0 0.5rem;
     font-size: 1.2rem;
 }
+.todoText {
+    cursor: pointer;
+    font-weight: bold;
+}
 .completed {
     text-decoration: line-through;
     color: rgb(175, 174, 174);
@@ -63,7 +67,6 @@ input:focus {
     cursor: pointer;
 }
 .remove {
-    color: rgb(236, 68, 68);
     border: 1px solid rgb(236, 68, 68);
     margin-left: 10px;
 }
@@ -74,4 +77,28 @@ input:focus {
 .updateTodo { 
     color: #6d28d9 ;
     background-color: #cdbce7;
+}
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+header span {
+    margin-right: 10px;
+    display: inline-block;
+    width: 20px;
+    font-size: 14px;
+    height: 20px;
+    background-color: #d0c7f7;
+    color: #6d28d9;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    font-weight: bold;
+}
+.select {
+    width: 150px;
+    margin-left: 2rem;
 }

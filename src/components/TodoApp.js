@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import NavBar from "./NavBar";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 
 const TodoApp = () => {
     // global state : todos
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState([]);
+    const [filteredTodos, setFilteredTodos] = useState([]);
+    const[selectedOption, setSelectedOption] = useState("All");
+
+    useEffect(()=>{
+        filterTodos(selectedOption.value)
+    },[todos, selectedOption])
+
+  
 
     // rule: Handler beside State:
     const addTodoHandler = (input) => {
@@ -28,8 +37,6 @@ const TodoApp = () => {
         updatedTodos[index] = selectedTodo;
         setTodos(updatedTodos);
     }
-
-    
     const removeTodo = (id) => {
         const filteredTodos = todos.filter((t) => t.id !== id)
         setTodos(filteredTodos)
@@ -42,11 +49,37 @@ const TodoApp = () => {
         updatedTodos[index] = selectedTodo;
         setTodos(updatedTodos);
     }
+    const statusHandler = (e) => {
+        console.log(e)
+        setSelectedOption(e.value)
+        filterTodos(e.value)
+    }
+    const filterTodos = (status) => {
+        switch (status) {
+            case "All":
+                setFilteredTodos(todos);
+                break;
+            case "Completed":
+                setFilteredTodos(todos.filter((t) => t.isCompleted));
+                break;
+            case "Uncompleted":
+                setFilteredTodos(todos.filter((t) => !t.isCompleted));
+                break;       
+            default:
+                setFilteredTodos(todos);    
+        }
+    }
     return ( 
         <div className = "container">
+            <NavBar 
+                unCompletedTodos={todos.filter(t => !t.isCompleted).length}
+                filterTodos={filterTodos}
+                selectedOption={selectedOption}
+                onChange={statusHandler}
+            />
             <TodoForm  submitTodo={addTodoHandler}/>
             <TodoList 
-                todos={todos}
+                todos={filteredTodos}
                 onComplete={completeTodo}
                 onDelete={removeTodo}
                 onEdit={editTodo}
