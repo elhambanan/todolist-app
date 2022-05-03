@@ -7,13 +7,11 @@ const TodoApp = () => {
     // global state : todos
     const [todos, setTodos] = useState([]);
     const [filteredTodos, setFilteredTodos] = useState([]);
-    const[selectedOption, setSelectedOption] = useState("All");
+    const [selectedOption, setSelectedOption] = useState("All");
 
     useEffect(()=>{
         filterTodos(selectedOption.value)
     },[todos, selectedOption])
-
-  
 
     // rule: Handler beside State:
     const addTodoHandler = (input) => {
@@ -51,14 +49,14 @@ const TodoApp = () => {
     }
     const statusHandler = (e) => {
         console.log(e)
-        setSelectedOption(e.value)
+        setSelectedOption(e)
         filterTodos(e.value)
     }
     const filterTodos = (status) => {
         switch (status) {
-            case "All":
-                setFilteredTodos(todos);
-                break;
+            // case "All":
+            //     setFilteredTodos(todos);
+            //     break;
             case "Completed":
                 setFilteredTodos(todos.filter((t) => t.isCompleted));
                 break;
@@ -76,6 +74,7 @@ const TodoApp = () => {
                 filterTodos={filterTodos}
                 selectedOption={selectedOption}
                 onChange={statusHandler}
+                className="navbar"
             />
             <TodoForm  submitTodo={addTodoHandler}/>
             <TodoList 
@@ -83,7 +82,7 @@ const TodoApp = () => {
                 onComplete={completeTodo}
                 onDelete={removeTodo}
                 onEdit={editTodo}
-                />
+            />
         </div>
      );
 }

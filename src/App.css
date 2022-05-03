@@ -15,7 +15,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 70%;
     /* width: 40rem; */
     background-color: #fff;
     border: 1px solid #ccc;
@@ -102,3 +102,20 @@ header span {
     width: 150px;
     margin-left: 2rem;
 }
+
+@media only screen and (max-width: 768px) {
+    .formControl , .todo{
+        width: 15rem;
+        
+    };
+    .navbar {
+    }
+    
+    header span h2 {
+     font-size: 12px;
+    };
+    Select {
+        width: 10rem;
+    };
+
+}    
